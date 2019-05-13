@@ -1,10 +1,10 @@
 # AwesomeEncoder
 
-> AntSword 自定义编码器分享
+> AntSword 自定义编码器/解码器分享
 
 ## 如何使用
 
-1. 在本仓库找到你喜欢编码器
+1. 在本仓库找到你喜欢编码器/解码器
 
 打开 AntSword, 进入「系统设置 」-> 「编码管理」
 
@@ -16,7 +16,7 @@
 
 ![](http://as.xuanbo.cc/doc/settings/encoder_edit_1.png)
 
-5. 在添加 Shell 或者 编辑Shell 配置时，就可以选择你的编码器啦
+5. 在添加 Shell 或者 编辑Shell 配置时，就可以选择你的编码器/解码器啦
 
 ## 注意事项
 

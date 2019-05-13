@@ -24,7 +24,7 @@ function get_cookie(Name, CookieStr="") {
 }
 
 function decryptText(keyStr, text) {
-  let buff = Buffer.alloc(16, '0');
+  let buff = Buffer.alloc(16, 'a');
   buff.write(keyStr,0);
   keyStr = buff.toString();
   let decodetext = CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(keyStr), {
@@ -35,7 +35,7 @@ function decryptText(keyStr, text) {
 }
 
 function encryptText(keyStr, text) {
-  let buff = Buffer.alloc(16, '0');
+  let buff = Buffer.alloc(16, 'a');
   buff.write(keyStr,0);
   keyStr = buff.toString();
   let encodetext = CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(keyStr), {
@@ -54,7 +54,7 @@ module.exports = {
   asoutput: () => {
     return `function asenc($out){
       @session_start();
-      $key=@substr(str_pad(session_id(),16,'0'),0,16);
+      $key=@substr(str_pad(session_id(),16,'a'),0,16);
       return @base64_encode(openssl_encrypt($out, 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
     };
     `.replace(/\n\s+/g, '');

