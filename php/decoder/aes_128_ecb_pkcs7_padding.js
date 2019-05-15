@@ -56,7 +56,7 @@ module.exports = {
     return `function asenc($out){
       @session_start();
       $key=@substr(str_pad(session_id(),16,'a'),0,16);
-      return @base64_encode(openssl_encrypt($out, 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
+      return @base64_encode(openssl_encrypt(base64_encode($out), 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
     };
     `.replace(/\n\s+/g, '');
   },
@@ -78,7 +78,7 @@ module.exports = {
       return data;
     }
     let ret = decryptText(keyStr, data);
-    return ret;
+    return Buffer.from(ret, 'base64').toString();
   },
   /**
    * 解码 Buffer
@@ -98,6 +98,6 @@ module.exports = {
       return data;
     }
     let ret = decryptText(keyStr, Buffer.from(data).toString());
-    return Buffer.from(ret);
+    return Buffer.from(ret, 'base64');
   }
 }

@@ -55,7 +55,7 @@ module.exports = {
    */
   asoutput: () => {
     return `function asenc($out){
-      return @base64_encode(openssl_encrypt($out, "AES-256-CFB", substr(str_pad(session_id(),32,'a'),0,32),OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, substr(str_pad(session_id(),32,'0'),0,32)));
+      return @base64_encode(openssl_encrypt(base64_encode($out), "AES-256-CFB", substr(str_pad(session_id(),32,'a'),0,32),OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, substr(str_pad(session_id(),32,'0'),0,32)));
     }
     `.replace(/\n\s+/g, '');
   },
@@ -77,7 +77,7 @@ module.exports = {
       return data;
     }
     let ret = decryptText(keyStr, data);
-    return ret;
+    return Buffer.from(ret, 'base64').toString();
   },
   /**
    * 解码 Buffer
@@ -96,6 +96,6 @@ module.exports = {
       window.toastr.error("未在 Cookie 中发现PHPSESSID", "错误");
       return data;
     }
-    return Buffer.from(decryptText(keyStr, Buffer.from(data).toString()));
+    return Buffer.from(decryptText(keyStr, Buffer.from(data).toString()), 'base64');
   }
 }
