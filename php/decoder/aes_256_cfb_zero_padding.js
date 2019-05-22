@@ -67,6 +67,9 @@ module.exports = {
    * @returns {string} 解码后的字符串
    */
   decode_str: (data, ext={}) => {
+    if(data.length === 0) {
+      return data;
+    }
     let headers = ext.opts.httpConf.headers;
     if(!headers.hasOwnProperty('Cookie')) {
       window.toastr.error("请先设置 Cookie (大小写敏感), 可通过浏览网站获取Cookie", "错误");
@@ -87,6 +90,9 @@ module.exports = {
    * @returns {string} 解码后的 Buffer
    */
   decode_buff: (data, ext={}) => {
+    if(data.length === 0) {
+      return data;
+    }
     let headers = ext.opts.httpConf.headers;
     if(!headers.hasOwnProperty('Cookie')) {
       window.toastr.error("请先设置 Cookie (大小写敏感), 可通过浏览网站获取Cookie", "错误");
