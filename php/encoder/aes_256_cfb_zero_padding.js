@@ -20,7 +20,8 @@ KEY的长度	aes-x-cbc
  */
 
 'use strict';
-var CryptoJS = require('crypto-js');
+const path = require('path');
+var CryptoJS = require(path.join(window.antSword.remote.process.env.AS_WORKDIR, 'node_modules/crypto-js'));
 
 function get_cookie(Name, CookieStr="") {
    var search = Name + "="
