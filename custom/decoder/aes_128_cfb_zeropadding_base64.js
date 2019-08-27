@@ -48,7 +48,6 @@ function decryptText(keyStr, text) {
     mode: CryptoJS.mode.CFB,
     padding: CryptoJS.pad.ZeroPadding
   }).toString(CryptoJS.enc.Utf8)
-  console.log(decodetext);
   return decodetext;
 }
 
