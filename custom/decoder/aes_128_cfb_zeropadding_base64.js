@@ -43,6 +43,7 @@ function decryptText(keyStr, text) {
   let buff = Buffer.alloc(16, 'a');
   buff.write(keyStr,0);
   keyStr = buff.toString();
+  text = text.replace(/[\r\n]/g,"");
   let decodetext = CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(keyStr), {
     iv: CryptoJS.enc.Utf8.parse(keyStr),
     mode: CryptoJS.mode.CFB,
